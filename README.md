@@ -50,7 +50,14 @@ contract PrivateBank {
 }
 ```
 you should provide tests for every method (deposit, withdraw, getBalance, getUserBalance), verifying state changes and returned values. 
+
 The withdraw method has some different flows, so you should do test for every flow. by testing withdraw() when balance, and withdraw() when no balance.
+
+So, sucessfull test execution does a full coverage of all methods and code flows.
+
+Example of execution:
+![image](https://github.com/jzafrap/FullcoverageTest/assets/36307819/1b9d9bea-f2a4-4108-bd49-26ff25c3df0e)
+
 
 
 
