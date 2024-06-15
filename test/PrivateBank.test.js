@@ -88,4 +88,56 @@ describe("PrivateBank", () => {
 
 		
 	})
+	
+	describe("Balance",function (){
+		it("should set to 0 after deployment", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//balance must be initiated with 0
+			expect(await privateBank.getBalance()).to.equals(0);
+		});		
+		it("should return balance of account", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//deposit 1 ether
+			await privateBank.deposit({ value: ethers.parseEther("1") });
+			expect(await privateBank.getBalance()).to.equals(ethers.parseEther("1"));
+		});		
+		it("should return 0 after withdraw of account", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//deposit 1 ether
+			await privateBank.deposit({ value: ethers.parseEther("1") });
+			//withdraw all
+			await privateBank.withdraw();
+			//balance must be initiated with 0
+			expect(await privateBank.getBalance()).to.equals(0);
+		});		
+
+	})
+	
+	describe("User Balance",function (){
+		it("should set to 0 after deployment", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//balance must be initiated with 0
+			expect(await privateBank.getUserBalance(owner)).to.equals(0);
+		});		
+		it("should return balance of account", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//deposit 1 ether
+			await privateBank.deposit({ value: ethers.parseEther("1") });
+			//withdraw all
+			//balance must be initiated with 0
+			expect(await privateBank.getUserBalance(owner)).to.equals(ethers.parseEther("1"));
+		});		
+		it("should return 0 after withdraw of account", async () => {
+			const { privateBank, owner } = await loadFixture(deployFixture);
+			//deposit 1 ether
+			await privateBank.deposit({ value: ethers.parseEther("1") });
+			//withdraw all
+			await privateBank.withdraw();
+			//balance must be initiated with 0
+			expect(await privateBank.getUserBalance(owner)).to.equals(0);
+		});		
+
+
+	})
+
 });
